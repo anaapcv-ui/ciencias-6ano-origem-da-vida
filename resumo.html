@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo · Origem da Vida e Seres Vivos · 6º ano</title>
+<style>
+  :root{--lava:#ff6b35;--lava2:#e63946;--ocean:#168aad;--ocean2:#1e6091;--life:#52b788;--life2:#2d6a4f;
+    --gold:#ffd166;--panel:#121a24;--panel2:#18222f;--line:#26364a;--txt:#e8eef5;--mut:#9fb2c6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.65;color:var(--txt);
+    background:linear-gradient(180deg,#1a0f0a,#0d1620 45%,#0a1512);padding-bottom:70px;font-size:1.02rem}
+  header.top{background:linear-gradient(120deg,var(--lava),var(--ocean),var(--life));padding:26px 20px 20px;text-align:center;border-bottom:4px solid #143d2b}
+  header.top .kicker{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:.92}
+  header.top h1{margin:6px 0 2px;font-size:1.5rem;text-shadow:0 2px 6px rgba(0,0,0,.35)}
+  header.top p{margin:0;color:#fff;font-size:.9rem}
+  nav.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#0c141d;padding:12px;position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line)}
+  nav.tabs a{padding:8px 14px;border-radius:20px;background:#16202c;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:600;border:1px solid var(--line)}
+  nav.tabs a.here{background:linear-gradient(120deg,var(--lava),var(--life));color:#fff;border-color:transparent}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px}
+  .sec{margin-bottom:34px}
+  .sec-title{display:flex;align-items:center;gap:12px;font-size:1.3rem;font-weight:800;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+  .sec-title .badge{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:20px;font-weight:700}
+  .b-lava{background:rgba(255,107,53,.18);color:#ffb493;border:1px solid #7a3418}
+  .b-ocean{background:rgba(22,138,173,.18);color:#8fd6ea;border:1px solid #14536b}
+  .b-life{background:rgba(82,183,136,.18);color:#a6e9c6;border:1px solid #1f5a3d}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .flip{background:transparent;perspective:1000px;height:170px;cursor:pointer}
+  .flip-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .flip.on .flip-in{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line)}
+  .front{background:var(--panel);}
+  .front .t{font-weight:800;font-size:1.05rem;margin-bottom:6px}
+  .front .hint{font-size:.78rem;color:var(--mut);margin-top:auto}
+  .back{background:linear-gradient(135deg,var(--panel2),#0e1a16);transform:rotateY(180deg);font-size:.92rem;color:#e2f0e8;overflow:auto}
+  .postit{background:var(--gold);color:#3a2c00;padding:14px 16px;border-radius:8px;margin:16px 0;box-shadow:2px 3px 8px rgba(0,0,0,.3);transform:rotate(-.5deg);font-size:.95rem}
+  .postit b{display:block;margin-bottom:3px}
+  .trap{background:rgba(230,57,70,.12);border:1px solid #7a2129;border-left:5px solid var(--lava2);padding:12px 16px;border-radius:8px;margin:16px 0}
+  .trap b{color:#ff9aa2}
+  table.cmp{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem;background:var(--panel);border-radius:12px;overflow:hidden}
+  table.cmp th,table.cmp td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  table.cmp th{background:#0e1721;color:var(--gold)}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;justify-content:center;margin:14px 0}
+  .flow span{background:var(--panel);border:1px solid var(--life2);border-radius:20px;padding:8px 14px;font-weight:700;font-size:.9rem}
+  .flow .arw{color:var(--life);font-size:1.2rem}
+  .gloss{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px 4px}
+  .gloss dt{font-weight:800;color:var(--ocean);padding:10px 14px 2px}
+  .gloss dd{margin:0 0 8px;padding:0 14px 8px;color:#dbe6f1;font-size:.94rem;border-bottom:1px solid #1b2735}
+  .studied{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.86rem;color:var(--mut);cursor:pointer;user-select:none}
+  .studied input{width:18px;height:18px;accent-color:var(--life)}
+  .save-panel{position:fixed;bottom:0;left:0;right:0;background:#0c141dee;border-top:1px solid var(--line);padding:8px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-size:.78rem;color:var(--mut);backdrop-filter:blur(6px);z-index:50}
+  .save-panel button{background:#16202c;border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:.78rem}
+  .nextlink{display:inline-block;margin:8px auto 0;background:linear-gradient(120deg,var(--ocean2),var(--lava2));color:#fff;text-decoration:none;padding:12px 22px;border-radius:12px;font-weight:700;text-align:center}
+  .modal-bg{display:none;position:fixed;inset:0;background:#000a;z-index:80;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:380px;text-align:center}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-weight:700;cursor:pointer;background:linear-gradient(120deg,var(--life2),var(--life));color:#fff}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="kicker">Ciências · 6º ano · Coração Feliz</div>
+  <h1>🗺️ Resumo Interativo</h1>
+  <p>Da Terra Primitiva à Célula — Capítulos 13 e 14</p>
+</header>
+<nav class="tabs">
+  <a href="index.html">🏠 Início</a>
+  <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+  <a href="quiz.html">🎯 Quiz</a>
+  <a href="resumo.html" class="here">🗺️ Resumo</a>
+  <a href="simulado.html">📝 Simulado</a>
+</nav>
+<div class="wrap">
+  <p style="color:var(--mut);font-size:.95rem">👉 Toque nos cartões para <b>virar</b> e ver a resposta. Marque cada bloco como "estudado" quando terminar.</p>
+
+  <!-- CAP 13 -->
+  <div class="sec">
+    <div class="sec-title"><span class="badge b-lava">🌋 Cap. 13</span> Origem da Vida — as teorias</div>
+    <div class="cards">
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Abiogênese</div><div>Geração espontânea</div><div class="hint">virar ↻</div></div>
+        <div class="face back">A vida surgiria <b>sozinha</b>, da matéria sem vida (ex.: vermes na carne). Hoje sabemos que está errada.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Biogênese</div><div>A vida vem da vida</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Todo ser vivo surge de <b>outro ser vivo preexistente</b>. Comprovada por Redi e Pasteur.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Redi</div><div>Frascos com carne</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Frasco <b>aberto</b> = larvas; <b>tampado com gaze</b> = sem larvas. As moscas é que botavam os ovos.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Pasteur</div><div>Pescoço de cisne</div><div class="hint">virar ↻</div></div>
+        <div class="face back">O gargalo curvo deixava o ar entrar mas <b>segurava os microrganismos</b>. Derrubou a abiogênese <b>de vez</b>.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Panspermia</div><div>Cosmogênese</div><div class="hint">virar ↻</div></div>
+        <div class="face back">A matéria-prima da vida teria vindo do <b>espaço</b>, em meteoritos (ex.: ALH84001, Murchison).</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Evolução química</div><div>Oparin (a mais aceita)</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Nos mares primitivos: moléculas → proteínas → <b>coacervados</b> → primeira célula. Miller e Urey testaram.</div>
+      </div></div>
+    </div>
+    <div class="postit"><b>📌 Dica de prova</b>LUCA = último ancestral comum (~4,2 bilhões de anos). Estromatólitos = fósseis mais antigos, feitos por cianobactérias (~3,4 bilhões de anos), em Pilbara/Austrália.</div>
+    <div class="trap"><b>⚠️ Cuidado:</b> não troque <b>meteoro</b> (rastro de luz), <b>meteoroide</b> (rocha no espaço) e <b>meteorito</b> (o que chega ao chão).</div>
+    <label class="studied"><input type="checkbox" data-k="c13"> Já estudei este bloco ✅</label>
+  </div>
+
+  <!-- CAP 14 -->
+  <div class="sec">
+    <div class="sec-title"><span class="badge b-life">🦠 Cap. 14</span> Características dos Seres Vivos</div>
+    <div class="cards">
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Composição química</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Compostos orgânicos com <b>C, H, O, N</b>: carboidratos, proteínas, lipídeos e ácidos nucleicos (DNA).</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Metabolismo</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Construir e degradar substâncias para obter <b>energia</b>. Ex.: respiração, digestão, fotossíntese.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Autotrófico</div><div class="hint">virar ↻</div></div>
+        <div class="face back"><b>Produz</b> o próprio alimento (planta, alga) pela fotossíntese. "Auto" = si mesmo.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Heterotrófico</div><div class="hint">virar ↻</div></div>
+        <div class="face back"><b>Come</b> outros seres (animais, fungos) para obter energia.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Evolução & Adaptação</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Transformação ao longo do tempo (seleção dos mais aptos). Ex.: cactos com folhas em espinho.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Reação a estímulos</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Responder ao ambiente pelos sentidos: <b>olfato, gustação, visão, audição, tato</b>.</div>
+      </div></div>
+    </div>
+
+    <h3 style="color:var(--gold);margin:22px 0 4px">🔬 A Célula</h3>
+    <div class="cards">
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Descoberta</div><div class="hint">virar ↻</div></div>
+        <div class="face back">Hooke (1665, cortiça) → Leeuwenhoek (células vivas) → <b>Schleiden e Schwann</b> (teoria celular).</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Partes da célula</div><div class="hint">virar ↻</div></div>
+        <div class="face back"><b>Membrana</b> (controla entrada/saída), <b>citoplasma</b> (organelas) e <b>núcleo</b> (material genético).</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('on')"><div class="flip-in">
+        <div class="face front"><div class="t">Vírus</div><div class="hint">virar ↻</div></div>
+        <div class="face back">São <b>acelulares</b> (não têm célula) → ficam fora da classificação tradicional de seres vivos.</div>
+      </div></div>
+    </div>
+
+    <table class="cmp">
+      <tr><th>Procariótica</th><th>Eucariótica</th></tr>
+      <tr><td>SEM envoltório no núcleo (material no nucleoide)</td><td>COM núcleo envolvido por membrana</td></tr>
+      <tr><td>Só ribossomos como organela</td><td>Várias organelas</td></tr>
+      <tr><td>Bactérias e cianobactérias</td><td>Animais e vegetais</td></tr>
+    </table>
+
+    <div class="postit"><b>📌 Número de células</b>Unicelular = 1 célula (bactéria, protozoário). Pluricelular = muitas células (animais, plantas).</div>
+
+    <div style="margin:12px 0 4px;font-weight:700;color:var(--life)">Níveis de organização (do menor ao maior):</div>
+    <div class="flow"><span>Célula</span><span class="arw">→</span><span>Tecido</span><span class="arw">→</span><span>Órgão</span><span class="arw">→</span><span>Sistema</span><span class="arw">→</span><span>Organismo</span></div>
+
+    <h3 style="color:var(--gold);margin:22px 0 4px">👶 Reprodução</h3>
+    <table class="cmp">
+      <tr><th>Assexuada</th><th>Sexuada</th></tr>
+      <tr><td>1 indivíduo</td><td>Geralmente 2 indivíduos</td></tr>
+      <tr><td>Descendentes idênticos</td><td>Gametas → fecundação → célula-ovo (zigoto)</td></tr>
+      <tr><td>Bactérias, protozoários, algas, violetas</td><td>Animais e plantas em geral</td></tr>
+    </table>
+    <div class="trap"><b>⚠️ Não confunda:</b> <b>Monoico</b> (hermafrodita) = os dois sexos no mesmo corpo (ex.: minhoca). <b>Dioico</b> = sexos separados (ex.: leões).</div>
+    <label class="studied"><input type="checkbox" data-k="c14"> Já estudei este bloco ✅</label>
+  </div>
+
+  <!-- GLOSSÁRIO -->
+  <div class="sec">
+    <div class="sec-title"><span class="badge b-ocean">📚</span> Glossário rápido</div>
+    <dl class="gloss">
+      <dt>LUCA</dt><dd>Último ancestral comum universal — a primeira célula de onde vieram todos os seres vivos.</dd>
+      <dt>Estromatólito</dt><dd>Fóssil mais antigo conhecido, formado por cianobactérias.</dd>
+      <dt>Abiogênese</dt><dd>Ideia (errada) de que a vida surge sozinha da matéria sem vida.</dd>
+      <dt>Biogênese</dt><dd>A vida vem sempre de outro ser vivo preexistente.</dd>
+      <dt>Coacervado</dt><dd>Aglomerado de proteínas envolto por água; NÃO é um ser vivo, mas teria originado a célula.</dd>
+      <dt>Metabolismo</dt><dd>Conjunto de reações de construir e degradar substâncias para obter energia.</dd>
+      <dt>Autotrófico / Heterotrófico</dt><dd>Produz o próprio alimento / alimenta-se de outros seres.</dd>
+      <dt>Procariótica / Eucariótica</dt><dd>Célula sem núcleo com envoltório / célula com núcleo e organelas.</dd>
+      <dt>Gameta</dt><dd>Célula reprodutiva especial; a união de dois gametas é a fecundação.</dd>
+      <dt>Zigoto (célula-ovo)</dt><dd>Célula formada na fecundação, que dá origem ao embrião.</dd>
+      <dt>Monoico / Dioico</dt><dd>Dois sexos no mesmo corpo / sexos separados em indivíduos diferentes.</dd>
+    </dl>
+    <div style="text-align:center"><a class="nextlink" href="simulado.html">Pronto para valer? Fazer o Simulado 📝</a></div>
+  </div>
+</div>
+
+<div class="save-panel">
+  <span id="saveInfo">💾 Progresso salvo automaticamente</span>
+  <button onclick="exportData()">📥 Exportar</button>
+  <button onclick="document.getElementById('importFile').click()">📤 Importar</button>
+  <button onclick="askReset()">🗑️ Zerar tudo</button>
+  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+</div>
+<div class="modal-bg" id="modalBg"><div class="modal"><p id="modalMsg"></p>
+  <button class="btn" id="modalOk" style="margin-top:12px">OK</button>
+  <button class="btn" id="modalCancel" style="background:#16202c;border:1px solid var(--line);color:var(--txt);display:none;margin-top:8px">Cancelar</button></div></div>
+
+<script>
+const KEY='resumo_ciencias6_cap1314_v1';
+let mem={};let useMem=false;
+function loadS(){try{const r=localStorage.getItem(KEY);mem=r?JSON.parse(r):{};}catch(e){useMem=true;mem={}}return mem;}
+function saveS(){try{if(!useMem)localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){useMem=true;}stamp();}
+function stamp(){const d=new Date();document.getElementById('saveInfo').textContent='💾 Salvo '+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR').slice(0,5);}
+loadS();if(!mem.studied)mem.studied={};
+document.querySelectorAll('.studied input').forEach(cb=>{
+  const k=cb.dataset.k;cb.checked=!!mem.studied[k];
+  cb.addEventListener('change',()=>{mem.studied[k]=cb.checked;saveS();});
+});
+stamp();
+function exportData(){const blob=new Blob([JSON.stringify(mem,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resumo-ciencias6.json';a.click();}
+function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{mem=JSON.parse(e.target.result);saveS();location.reload();}catch(err){showModal('Arquivo inválido.');}};r.readAsText(f);}
+function askReset(){showModal('Zerar as marcações de "estudei" deste Resumo?',true,()=>{mem={studied:{}};saveS();location.reload();});}
+let modalCb=null;
+function showModal(msg,cancel,cb){document.getElementById('modalMsg').textContent=msg;document.getElementById('modalCancel').style.display=cancel?'inline-block':'none';document.getElementById('modalBg').classList.add('show');modalCb=cb||null;}
+document.getElementById('modalOk').onclick=()=>{document.getElementById('modalBg').classList.remove('show');if(modalCb)modalCb();};
+document.getElementById('modalCancel').onclick=()=>{document.getElementById('modalBg').classList.remove('show');modalCb=null;};
+</script>
+</body>
+</html>
