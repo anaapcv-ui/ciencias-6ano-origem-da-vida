@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz · Origem da Vida e Seres Vivos · 6º ano</title>
+<style>
+  :root{--lava:#ff6b35;--lava2:#e63946;--ocean:#168aad;--ocean2:#1e6091;--life:#52b788;
+    --gold:#ffd166;--panel:#121a24;--panel2:#18222f;--line:#26364a;--txt:#e8eef5;--mut:#9fb2c6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;color:var(--txt);
+    background:linear-gradient(180deg,#1a0f0a,#0d1620 45%,#0a1512);padding-bottom:70px}
+  header.top{background:linear-gradient(120deg,var(--ocean2),var(--ocean));padding:26px 20px 20px;text-align:center;border-bottom:4px solid #0e3d52}
+  header.top .kicker{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#d6f2fb;opacity:.9}
+  header.top h1{margin:6px 0 2px;font-size:1.5rem}
+  header.top p{margin:0;color:#eaf9ff;font-size:.9rem}
+  nav.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#0c141d;padding:12px;position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line)}
+  nav.tabs a{padding:8px 14px;border-radius:20px;background:#16202c;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:600;border:1px solid var(--line)}
+  nav.tabs a.here{background:linear-gradient(120deg,var(--ocean2),var(--ocean));color:#fff;border-color:transparent}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px}
+  .progress-outer{height:12px;background:#0c141d;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin-bottom:6px}
+  .progress-inner{height:100%;width:0;background:linear-gradient(90deg,var(--ocean),var(--life));transition:width .3s}
+  .progress-label{font-size:.8rem;color:var(--mut);margin-bottom:18px;text-align:center}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .q .num{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--ocean);font-weight:700}
+  .q .stem{font-weight:600;margin:6px 0 12px;font-size:1.02rem}
+  .opt{display:block;background:#0e1721;border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:8px 0;cursor:pointer;transition:.15s}
+  .opt:hover{border-color:var(--ocean)}
+  .opt.sel{border-color:var(--ocean);background:rgba(22,138,173,.14)}
+  .opt .letter{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#26364a;margin-right:8px;font-weight:700;font-size:.82rem}
+  .opt.correct{border-color:var(--life);background:rgba(82,183,136,.16)}
+  .opt.wrong{border-color:var(--lava2);background:rgba(230,57,70,.12);opacity:.85}
+  .explain{display:none;margin-top:8px;font-size:.88rem;padding:8px 12px;border-radius:8px}
+  .explain.show{display:block}
+  .explain.ok{background:rgba(82,183,136,.1);border-left:4px solid var(--life);color:#cdeeda}
+  .explain.no{background:rgba(230,57,70,.08);border-left:4px solid var(--lava2);color:#f2c4c8}
+  .btn{border:none;border-radius:12px;padding:13px 26px;font-weight:700;font-size:1rem;cursor:pointer}
+  .btn-go{background:linear-gradient(120deg,var(--life),var(--ocean));color:#fff;display:block;margin:20px auto}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .result{display:none;background:linear-gradient(135deg,#14202a,#1e2a1f);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:center;margin-bottom:20px}
+  .result.show{display:block}
+  .result h2{margin:0 0 6px}
+  .score{font-size:2.4rem;font-weight:800;color:var(--gold)}
+  .code{font-size:1.6rem;font-weight:800;letter-spacing:2px;color:var(--life);background:#0c141d;border:2px dashed var(--life);border-radius:12px;padding:12px;display:inline-block;margin:12px 0}
+  .code-help{font-size:.82rem;color:var(--mut);max-width:460px;margin:0 auto}
+  .save-panel{position:fixed;bottom:0;left:0;right:0;background:#0c141dee;border-top:1px solid var(--line);padding:8px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-size:.78rem;color:var(--mut);backdrop-filter:blur(6px);z-index:50}
+  .save-panel button{background:#16202c;border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:.78rem}
+  .nextlink{display:inline-block;margin-top:14px;background:linear-gradient(120deg,var(--life),var(--life));color:#fff;text-decoration:none;padding:12px 22px;border-radius:12px;font-weight:700}
+  .modal-bg{display:none;position:fixed;inset:0;background:#000a;z-index:80;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:380px;text-align:center}
+  .warn{color:#ffb493;font-size:.85rem;margin-top:6px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="kicker">Ciências · 6º ano · Coração Feliz</div>
+  <h1>🎯 Quiz</h1>
+  <p>Da Terra Primitiva à Célula — Capítulos 13 e 14</p>
+</header>
+<nav class="tabs">
+  <a href="index.html">🏠 Início</a>
+  <a href="leitura-guiada.html">📖 Leitura Guiada</a>
+  <a href="quiz.html" class="here">🎯 Quiz</a>
+  <a href="resumo.html">🗺️ Resumo</a>
+  <a href="simulado.html">📝 Simulado</a>
+</nav>
+<div class="wrap">
+  <div class="result" id="result">
+    <h2>🏁 Resultado</h2>
+    <div class="score" id="scoreTxt"></div>
+    <div>Seu código de liberação:</div>
+    <div class="code" id="codeTxt"></div>
+    <div class="code-help">📌 <b>Para os responsáveis:</b> os dois números do meio mostram quantas o(a) jovem aprendiz acertou (de 15). As duas letras finais são só um selo. Role para baixo e veja o <b>gabarito comentado</b> de cada questão.</div>
+    <br><a class="nextlink" href="resumo.html">Fechar as lacunas: ir ao Resumo 🗺️</a>
+  </div>
+
+  <div class="progress-outer"><div class="progress-inner" id="pbar"></div></div>
+  <div class="progress-label" id="plabel">0 de 15 respondidas</div>
+
+  <div id="quiz"></div>
+  <button class="btn btn-go" id="finishBtn" onclick="finish()" disabled>✅ Corrigir e ver meu código</button>
+  <div style="text-align:center"><span class="warn" id="warnTxt"></span></div>
+</div>
+
+<div class="save-panel">
+  <span id="saveInfo">💾 Progresso salvo automaticamente</span>
+  <button onclick="exportData()">📥 Exportar</button>
+  <button onclick="document.getElementById('importFile').click()">📤 Importar</button>
+  <button onclick="askReset()">🗑️ Zerar tudo</button>
+  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <p id="modalMsg"></p>
+    <button class="btn btn-go" id="modalOk" style="margin:12px auto 0">OK</button>
+    <button class="btn" id="modalCancel" style="background:#16202c;border:1px solid var(--line);color:var(--txt);display:none;margin:8px auto 0">Cancelar</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS=[
+ {stem:'O que é o "LUCA", citado no início do capítulo sobre a origem da vida?',
+  opts:[
+   {t:'O último ancestral comum universal: a célula da qual todos os seres vivos teriam se originado',c:true,e:'Correto! LUCA (Last Universal Common Ancestor) é a célula ancestral comum a todos os seres vivos, com idade estimada de ~4,2 bilhões de anos.'},
+   {t:'Um tipo de fóssil encontrado apenas na Austrália',c:false,e:'Os fósseis australianos são os estromatólitos. LUCA é o ancestral comum, e dele não há fóssil direto.'},
+   {t:'O primeiro cientista a estudar a origem da vida',c:false,e:'LUCA não é uma pessoa, e sim a primeira célula ancestral de todos os seres vivos.'},
+   {t:'Uma molécula de DNA encontrada em meteoritos',c:false,e:'LUCA é uma célula ancestral, não uma molécula de meteorito.'}]},
+
+ {stem:'O que são os estromatólitos?',
+  opts:[
+   {t:'Os fósseis mais antigos que se conhece, formados por cianobactérias',c:true,e:'Isso mesmo! São estruturas calcárias formadas por cianobactérias (~3,4 bilhões de anos), em Pilbara, na Austrália.'},
+   {t:'Meteoritos que trouxeram a vida do espaço',c:false,e:'Meteoritos se ligam à panspermia. Estromatólitos são fósseis formados por cianobactérias.'},
+   {t:'Coacervados formados no oceano primitivo',c:false,e:'Coacervados são aglomerados de proteínas da hipótese de Oparin, não fósseis.'},
+   {t:'Células eucarióticas modernas',c:false,e:'Estromatólitos são fósseis antigos ligados a cianobactérias (procarióticas), não células eucarióticas modernas.'}]},
+
+ {stem:'A palavra "abiogênese" (geração espontânea) significa:',
+  opts:[
+   {t:'"Geração sem vida" — a vida surgiria da matéria sem vida, sem precisar de outro ser vivo',c:true,e:'Exato! Do grego a=ausência, bio=vida, genesis=origem.'},
+   {t:'"Vida que vem de outra vida"',c:false,e:'Isso é a biogênese, o contrário da abiogênese.'},
+   {t:'"Vida trazida do espaço"',c:false,e:'Isso descreve a panspermia, não a abiogênese.'},
+   {t:'"Estudo das células"',c:false,e:'Esse seria o significado ligado à citologia; abiogênese é "geração sem vida".'}]},
+
+ {stem:'No experimento de Francesco Redi, o que aconteceu nos frascos tampados com gaze?',
+  opts:[
+   {t:'Não surgiram larvas, porque as moscas não conseguiram botar ovos na carne',c:true,e:'Correto! Isso mostrou que as larvas vinham dos ovos das moscas, não da carne por geração espontânea.'},
+   {t:'Surgiram larvas normalmente, como nos abertos',c:false,e:'Justamente nos tampados NÃO surgiram larvas — essa foi a prova de Redi.'},
+   {t:'A carne virou um novo ser vivo',c:false,e:'A carne não gera seres vivos sozinha; essa é a ideia errada que Redi combateu.'},
+   {t:'Surgiram bactérias, mas não larvas',c:false,e:'O experimento de Redi tratava das larvas de moscas, e nos frascos tampados elas não apareceram.'}]},
+
+ {stem:'Qual cientista refutou definitivamente a geração espontânea usando um balão com gargalo em forma de "pescoço de cisne"?',
+  opts:[
+   {t:'Louis Pasteur',c:true,e:'Correto! O formato deixava o ar entrar mas prendia os microrganismos, provando a biogênese.'},
+   {t:'Francesco Redi',c:false,e:'Redi usou frascos com carne e gaze. O balão pescoço de cisne foi de Pasteur.'},
+   {t:'Alexander Oparin',c:false,e:'Oparin propôs a evolução química, não o experimento do pescoço de cisne.'},
+   {t:'Robert Hooke',c:false,e:'Hooke observou células na cortiça em 1665; quem fez o pescoço de cisne foi Pasteur.'}]},
+
+ {stem:'Na hipótese da panspermia (cosmogênese), como a vida teria chegado à Terra?',
+  opts:[
+   {t:'A matéria-prima da vida teria vindo do espaço, trazida por meteoritos',c:true,e:'Correto! Foram achadas moléculas orgânicas em meteoritos como o ALH84001 e o Murchison.'},
+   {t:'A vida surgiu da lama por uma força vital do ar',c:false,e:'Essa é a ideia da abiogênese, já refutada.'},
+   {t:'A vida se formou nos mares primitivos, a partir de coacervados',c:false,e:'Essa é a evolução química (Oparin), não a panspermia.'},
+   {t:'A vida foi criada em laboratório por Miller e Urey',c:false,e:'Miller e Urey apenas simularam a Terra primitiva; não criaram vida.'}]},
+
+ {stem:'Qual é a diferença correta entre meteoro, meteoroide e meteorito?',
+  opts:[
+   {t:'Meteoroide é a rocha no espaço; meteoro é o rastro de luz; meteorito é o que chega ao chão',c:true,e:'Perfeito! Essa é a sequência correta.'},
+   {t:'Meteoro é a rocha no espaço; meteorito é o rastro de luz; meteoroide chega ao chão',c:false,e:'Trocou os nomes: meteoroide é a rocha no espaço; meteoro é o rastro; meteorito chega ao chão.'},
+   {t:'Todos são o mesmo objeto, com nomes diferentes por país',c:false,e:'Não: cada palavra indica uma fase/situação diferente do objeto.'},
+   {t:'Meteorito é o rastro de luz no céu',c:false,e:'O rastro de luz é o meteoro; meteorito é o que atinge a superfície.'}]},
+
+ {stem:'Segundo a hipótese da evolução química, defendida por Oparin, a primeira célula teria surgido a partir de:',
+  opts:[
+   {t:'Coacervados formados nos mares primitivos, a partir de moléculas orgânicas',c:true,e:'Correto! Moléculas orgânicas → proteínas → coacervados → primeira célula.'},
+   {t:'Meteoritos vindos de Marte',c:false,e:'Essa seria a panspermia. Oparin defende a formação na própria Terra.'},
+   {t:'Larvas que apareceram na carne',c:false,e:'Isso é a geração espontânea, já refutada.'},
+   {t:'Vírus que evoluíram para células',c:false,e:'Vírus são acelulares e não deram origem às células segundo essa hipótese.'}]},
+
+ {stem:'O experimento de Miller e Urey foi importante porque:',
+  opts:[
+   {t:'Simulou a atmosfera da Terra primitiva e produziu aminoácidos, reforçando a hipótese de Oparin',c:true,e:'Isso mesmo! Mostrou que moléculas orgânicas podem se formar espontaneamente naquelas condições.'},
+   {t:'Provou que a vida veio do espaço',c:false,e:'Ele reforçou a evolução química (na Terra), não a panspermia.'},
+   {t:'Criou um ser vivo completo em laboratório',c:false,e:'Não criou vida; produziu aminoácidos (substâncias orgânicas).'},
+   {t:'Refutou a teoria da biogênese',c:false,e:'A biogênese está correta e não foi refutada por esse experimento.'}]},
+
+ {stem:'Sobre a forma de obter alimento, os seres vivos se dividem em:',
+  opts:[
+   {t:'Autotróficos (produzem o próprio alimento) e heterotróficos (comem outros seres)',c:true,e:'Correto! Plantas e algas são autotróficas; animais e fungos, heterotróficos.'},
+   {t:'Procarióticos e eucarióticos',c:false,e:'Essa é a classificação por tipo de célula, não por alimentação.'},
+   {t:'Unicelulares e pluricelulares',c:false,e:'Essa classificação é pelo número de células, não pela alimentação.'},
+   {t:'Monoicos e dioicos',c:false,e:'Isso se refere aos sexos na reprodução, não à alimentação.'}]},
+
+ {stem:'Quais são os principais elementos químicos que formam os compostos orgânicos dos seres vivos?',
+  opts:[
+   {t:'Carbono, hidrogênio, oxigênio e nitrogênio',c:true,e:'Correto! Formam carboidratos, proteínas, lipídeos e ácidos nucleicos.'},
+   {t:'Ferro, ouro, cobre e alumínio',c:false,e:'Esses são metais, não os principais elementos dos compostos orgânicos.'},
+   {t:'Hélio, neônio e argônio',c:false,e:'São gases nobres, não formam os compostos orgânicos da vida.'},
+   {t:'Cálcio, sódio e potássio apenas',c:false,e:'São importantes, mas os principais dos compostos orgânicos são C, H, O e N.'}]},
+
+ {stem:'Uma célula PROCARIÓTICA se caracteriza por:',
+  opts:[
+   {t:'Não ter envoltório no núcleo (material genético no nucleoide) e ter só ribossomos como organela',c:true,e:'Correto! É o caso das bactérias e cianobactérias.'},
+   {t:'Ter núcleo com envoltório e várias organelas',c:false,e:'Isso descreve a célula eucariótica, não a procariótica.'},
+   {t:'Não ter material genético',c:false,e:'Ela tem material genético, só que solto no citoplasma (nucleoide).'},
+   {t:'Ser encontrada apenas em animais',c:false,e:'Procarióticas são de bactérias e cianobactérias; animais têm células eucarióticas.'}]},
+
+ {stem:'Por que os vírus não entram na classificação tradicional dos seres vivos?',
+  opts:[
+   {t:'Porque são acelulares, ou seja, não têm estrutura celular',c:true,e:'Correto! Sem célula, eles ficam de fora da classificação tradicional.'},
+   {t:'Porque são grandes demais para ter célula',c:false,e:'Ao contrário, são pequeníssimos; o motivo é não terem célula.'},
+   {t:'Porque são células procarióticas',c:false,e:'Vírus não são células (nem procarióticas nem eucarióticas): são acelulares.'},
+   {t:'Porque fazem fotossíntese',c:false,e:'Vírus não fazem fotossíntese; o motivo é serem acelulares.'}]},
+
+ {stem:'Qual é a ordem correta dos níveis de organização dos seres pluricelulares, do menor para o maior?',
+  opts:[
+   {t:'Célula → tecido → órgão → sistema → organismo',c:true,e:'Correto! Sempre do menor (célula) para o maior (organismo).'},
+   {t:'Órgão → célula → sistema → tecido → organismo',c:false,e:'A ordem está embaralhada. O correto começa na célula e termina no organismo.'},
+   {t:'Organismo → sistema → órgão → tecido → célula',c:false,e:'Essa é a ordem invertida (do maior para o menor).'},
+   {t:'Tecido → célula → órgão → organismo → sistema',c:false,e:'A célula vem primeiro. O correto é célula → tecido → órgão → sistema → organismo.'}]},
+
+ {stem:'Na reprodução ASSEXUADA:',
+  opts:[
+   {t:'Um único indivíduo gera descendentes praticamente idênticos a ele',c:true,e:'Correto! Comum em bactérias, protozoários, esponjas, algas e violetas.'},
+   {t:'Dois indivíduos produzem gametas que se unem na fecundação',c:false,e:'Isso descreve a reprodução sexuada.'},
+   {t:'Sempre há mistura de características de macho e fêmea',c:false,e:'Na assexuada não há mistura: os descendentes são idênticos ao ancestral.'},
+   {t:'Só ocorre em animais grandes',c:false,e:'Ela é comum justamente em seres unicelulares e alguns pluricelulares simples.'}]}
+];
+
+/* ---------- storage ---------- */
+const KEY='quiz_ciencias6_cap1314_v1';
+let mem={}; let useMem=false;
+function loadS(){try{const r=localStorage.getItem(KEY);mem=r?JSON.parse(r):{};}catch(e){useMem=true;mem={}}return mem;}
+function saveS(){try{if(!useMem)localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){useMem=true;}stamp();}
+function stamp(){const d=new Date();document.getElementById('saveInfo').textContent='💾 Salvo '+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR').slice(0,5);}
+loadS();
+if(!mem.sel)mem.sel={};
+if(mem.finished===undefined)mem.finished=false;
+
+/* ---------- seeded shuffle (stable per question) ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function shuffled(arr,seed){const a=arr.map((x,i)=>({x,i}));const rnd=mulberry32(seed);
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* precompute display order: each option keeps its original object (with .c) */
+const ORDER=QUESTIONS.map((q,qi)=>shuffled(q.opts,qi+1));
+
+/* ---------- render ---------- */
+const quizEl=document.getElementById('quiz');
+QUESTIONS.forEach((q,qi)=>{
+  const div=document.createElement('div');div.className='q';div.id='q'+qi;
+  let opts='';
+  ORDER[qi].forEach((o,di)=>{
+    const letter=String.fromCharCode(65+di);
+    opts+=`<label class="opt" id="opt-${qi}-${di}" onclick="pick(${qi},${di})">
+      <span class="letter">${letter}</span>${o.x.t}
+      <div class="explain" id="exp-${qi}-${di}"></div></label>`;
+  });
+  div.innerHTML=`<div class="num">Questão ${qi+1} de 15</div><div class="stem">${q.stem}</div>${opts}`;
+  quizEl.appendChild(div);
+});
+
+function pick(qi,di){
+  if(mem.finished)return;
+  mem.sel[qi]=di;saveS();
+  document.querySelectorAll('#q'+qi+' .opt').forEach((el,i)=>el.classList.toggle('sel',i===di));
+  updateProgress();
+}
+function updateProgress(){
+  const n=Object.keys(mem.sel).length;
+  document.getElementById('pbar').style.width=(n/QUESTIONS.length*100)+'%';
+  document.getElementById('plabel').textContent=n+' de 15 respondidas';
+  document.getElementById('finishBtn').disabled=(n<QUESTIONS.length)||mem.finished;
+  document.getElementById('warnTxt').textContent=(n<QUESTIONS.length)?('Faltam '+(QUESTIONS.length-n)+' questão(ões) para poder corrigir.'):'';
+}
+/* restore */
+Object.keys(mem.sel).forEach(qi=>{const di=mem.sel[qi];const el=document.getElementById('opt-'+qi+'-'+di);if(el)el.classList.add('sel');});
+updateProgress();
+
+function randLetters(seed){const alpha='ABCDEFGHJKLMNPQRSTUVWXYZ';/*sem I e O*/const rnd=mulberry32(seed);
+  return alpha[Math.floor(rnd()*alpha.length)]+alpha[Math.floor(rnd()*alpha.length)];}
+
+function finish(){
+  if(Object.keys(mem.sel).length<QUESTIONS.length)return;
+  mem.finished=true;
+  let correct=0;
+  QUESTIONS.forEach((q,qi)=>{
+    const di=mem.sel[qi];const chosen=ORDER[qi][di].x;
+    if(chosen.c)correct++;
+    ORDER[qi].forEach((o,i)=>{
+      const el=document.getElementById('opt-'+qi+'-'+i);
+      const exp=document.getElementById('exp-'+qi+'-'+i);
+      el.style.cursor='default';
+      if(o.x.c){el.classList.add('correct');exp.className='explain ok show';exp.innerHTML='✔️ '+o.x.e;}
+      else if(i===di){el.classList.add('wrong');exp.className='explain no show';exp.innerHTML='✗ '+o.x.e;}
+    });
+  });
+  mem.score=correct;
+  if(!mem.code){const xx=String(correct).padStart(2,'0');mem.code='MED-'+xx+'-'+randLetters(correct*7+13);}
+  saveS();
+  showResult();
+  document.getElementById('finishBtn').disabled=true;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showResult(){
+  document.getElementById('result').classList.add('show');
+  document.getElementById('scoreTxt').textContent='Você acertou '+mem.score+' de 15';
+  document.getElementById('codeTxt').textContent=mem.code;
+}
+/* if already finished, re-render corrected state */
+if(mem.finished){
+  QUESTIONS.forEach((q,qi)=>{
+    const di=mem.sel[qi];
+    ORDER[qi].forEach((o,i)=>{
+      const el=document.getElementById('opt-'+qi+'-'+i);const exp=document.getElementById('exp-'+qi+'-'+i);
+      el.style.cursor='default';
+      if(o.x.c){el.classList.add('correct');exp.className='explain ok show';exp.innerHTML='✔️ '+o.x.e;}
+      else if(i===di){el.classList.add('wrong');exp.className='explain no show';exp.innerHTML='✗ '+o.x.e;}
+    });
+  });
+  showResult();document.getElementById('finishBtn').disabled=true;
+}
+stamp();
+
+/* ---------- export / import / reset ---------- */
+function exportData(){const blob=new Blob([JSON.stringify(mem,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='quiz-ciencias6.json';a.click();}
+function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{try{mem=JSON.parse(e.target.result);saveS();location.reload();}catch(err){showModal('Arquivo inválido.');}};r.readAsText(f);}
+function askReset(){showModal('Tem certeza que quer zerar o Quiz? Isso apaga suas respostas e o código.',true,()=>{mem={sel:{},finished:false};try{if(!useMem)localStorage.removeItem(KEY);}catch(e){}location.reload();});}
+/* ---------- modal ---------- */
+let modalCb=null;
+function showModal(msg,cancel,cb){document.getElementById('modalMsg').textContent=msg;document.getElementById('modalCancel').style.display=cancel?'inline-block':'none';document.getElementById('modalBg').classList.add('show');modalCb=cb||null;}
+document.getElementById('modalOk').onclick=()=>{document.getElementById('modalBg').classList.remove('show');if(modalCb)modalCb();};
+document.getElementById('modalCancel').onclick=()=>{document.getElementById('modalBg').classList.remove('show');modalCb=null;};
+</script>
+</body>
+</html>
