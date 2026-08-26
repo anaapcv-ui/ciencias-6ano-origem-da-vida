@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada · Origem da Vida e Seres Vivos · 6º ano</title>
+<style>
+  :root{
+    --lava:#ff6b35; --lava2:#e63946; --ocean:#168aad; --ocean2:#1e6091;
+    --life:#52b788; --life2:#2d6a4f; --gold:#ffd166; --ink:#0a0f16;
+    --panel:#121a24; --panel2:#18222f; --line:#26364a; --txt:#e8eef5; --mut:#9fb2c6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:linear-gradient(180deg,#1a0f0a 0%,#0d1620 45%,#0a1512 100%);
+    color:var(--txt);line-height:1.65;padding-bottom:60px}
+  a{color:inherit}
+  header.top{background:linear-gradient(120deg,var(--life2),var(--life));
+    padding:26px 20px 20px;text-align:center;border-bottom:4px solid #143d2b}
+  header.top .kicker{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#d8ffe9;opacity:.9}
+  header.top h1{margin:6px 0 2px;font-size:1.5rem}
+  header.top p{margin:0;color:#eafff3;font-size:.9rem}
+  nav.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    background:#0c141d;padding:12px;position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line)}
+  nav.tabs a{padding:8px 14px;border-radius:20px;background:#16202c;color:var(--mut);
+    text-decoration:none;font-size:.85rem;font-weight:600;border:1px solid var(--line)}
+  nav.tabs a.here{background:linear-gradient(120deg,var(--life2),var(--life));color:#fff;border-color:transparent}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px}
+  .journey{display:flex;justify-content:space-between;gap:6px;margin:6px 0 20px;font-size:.72rem;color:var(--mut)}
+  .journey span{flex:1;text-align:center;padding:8px 4px;border-radius:10px;background:#101922;border:1px solid var(--line)}
+  .progress-outer{height:12px;background:#0c141d;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin-bottom:8px}
+  .progress-inner{height:100%;width:0;background:linear-gradient(90deg,var(--lava),var(--ocean),var(--life));transition:width .4s}
+  .progress-label{font-size:.8rem;color:var(--mut);margin-bottom:18px;text-align:center}
+  .block{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  .block.locked{opacity:.45;filter:grayscale(.5)}
+  .block h2{margin:0 0 4px;font-size:1.2rem;display:flex;align-items:center;gap:10px}
+  .stage{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;padding:3px 9px;border-radius:20px;font-weight:700}
+  .st-lava{background:rgba(255,107,53,.18);color:#ffb493;border:1px solid #7a3418}
+  .st-ocean{background:rgba(22,138,173,.18);color:#8fd6ea;border:1px solid #14536b}
+  .st-life{background:rgba(82,183,136,.18);color:#a6e9c6;border:1px solid #1f5a3d}
+  .block p{margin:10px 0;color:#dbe6f1}
+  .key{color:var(--gold);font-weight:700}
+  .postit{background:var(--gold);color:#3a2c00;padding:12px 14px;border-radius:8px;margin:14px 0;
+    font-size:.92rem;box-shadow:2px 3px 8px rgba(0,0,0,.3);transform:rotate(-.6deg)}
+  .postit b{display:block;margin-bottom:2px}
+  .trap{background:rgba(230,57,70,.12);border:1px solid #7a2129;border-left:5px solid var(--lava2);
+    padding:12px 14px;border-radius:8px;margin:14px 0;font-size:.92rem}
+  .trap b{color:#ff9aa2}
+  .qbox{background:#0e1721;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px}
+  .qbox label{display:block;font-weight:600;margin:10px 0 6px;color:#cfe6d9}
+  .qbox textarea{width:100%;min-height:60px;background:#0a1119;border:1px solid var(--line);border-radius:8px;
+    color:var(--txt);padding:10px;font-family:inherit;font-size:.95rem;resize:vertical}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-weight:700;font-size:.95rem;cursor:pointer}
+  .btn-check{background:linear-gradient(120deg,var(--life2),var(--life));color:#fff;margin-top:12px}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .model{display:none;margin-top:14px;background:rgba(82,183,136,.08);border:1px dashed #2d6a4f;border-radius:10px;padding:14px}
+  .model.show{display:block}
+  .model h4{margin:0 0 8px;color:var(--life)}
+  .model .ans{margin:8px 0;padding-left:12px;border-left:3px solid var(--life2);color:#d3e8dc;font-size:.93rem}
+  .selfeval{margin-top:12px}
+  .selfeval span{font-size:.85rem;color:var(--mut);display:block;margin-bottom:6px}
+  .selfeval button{background:#16202c;border:1px solid var(--line);color:var(--txt);border-radius:20px;
+    padding:6px 12px;margin:3px;cursor:pointer;font-size:.82rem}
+  .selfeval button.sel{background:var(--life2);border-color:var(--life);color:#fff}
+  .save-panel{position:fixed;bottom:0;left:0;right:0;background:#0c141dee;border-top:1px solid var(--line);
+    padding:8px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;
+    font-size:.78rem;color:var(--mut);backdrop-filter:blur(6px);z-index:50}
+  .save-panel button{background:#16202c;border:1px solid var(--line);color:var(--txt);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font-size:.78rem}
+  .final{background:linear-gradient(135deg,#1e2a1f,#14202a);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:10px}
+  .final h2{margin-top:0;color:var(--gold)}
+  .nextlink{display:inline-block;margin-top:16px;background:linear-gradient(120deg,var(--ocean2),var(--ocean));
+    color:#fff;text-decoration:none;padding:12px 22px;border-radius:12px;font-weight:700}
+  .modal-bg{display:none;position:fixed;inset:0;background:#000a;z-index:80;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.show{display:flex}
+  .modal{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:22px;max-width:380px;text-align:center}
+  .modal button{margin-top:14px}
+  .hint{font-size:.78rem;color:var(--mut);margin-top:6px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="kicker">Ciências · 6º ano · Coração Feliz</div>
+  <h1>📖 Leitura Guiada</h1>
+  <p>Da Terra Primitiva à Célula — Capítulos 13 e 14</p>
+</header>
+<nav class="tabs">
+  <a href="index.html">🏠 Início</a>
+  <a href="leitura-guiada.html" class="here">📖 Leitura Guiada</a>
+  <a href="quiz.html">🎯 Quiz</a>
+  <a href="resumo.html">🗺️ Resumo</a>
+  <a href="simulado.html">📝 Simulado</a>
+</nav>
+<div class="wrap">
+  <div class="journey">
+    <span>🌋 Terra em fogo</span><span>🌊 Oceanos primitivos</span><span>🦠 A vida celular</span>
+  </div>
+  <div class="progress-outer"><div class="progress-inner" id="pbar"></div></div>
+  <div class="progress-label" id="plabel">Bloco 0 de 11 concluídos</div>
+
+  <p style="color:var(--mut);font-size:.92rem">Leia cada bloco com calma. No fim de cada um, responda as
+  perguntas com <b>suas palavras</b> e clique em <b>Conferir</b> para comparar com uma resposta-modelo.
+  O próximo bloco só abre depois que você conferir o atual. 🚀</p>
+
+  <div id="blocks"></div>
+
+  <div class="final" id="finalCard" style="display:none">
+    <h2>🎯 Fique esperto: as pegadinhas mais comuns</h2>
+    <div class="trap"><b>Pegadinha 1:</b> <b>Biogênese</b> é a teoria de que a vida vem de outro ser vivo. <b>Abiogênese</b> (geração espontânea) é o contrário. Não troque os nomes!</div>
+    <div class="trap"><b>Pegadinha 2:</b> <b>Redi</b> usou frascos com carne (aberto × tampado com gaze). <b>Pasteur</b> usou o balão de <b>pescoço de cisne</b>. Quem refutou a abiogênese <b>de vez</b> foi o Pasteur.</div>
+    <div class="trap"><b>Pegadinha 3:</b> <b>Meteoro</b> é o rastro de luz; <b>meteoroide</b> é a rocha viajando no espaço; <b>meteorito</b> é o que cai e chega ao chão. A panspermia se liga aos meteoritos.</div>
+    <div class="trap"><b>Pegadinha 4:</b> <b>Autotrófico</b> produz o próprio alimento (planta, alga). <b>Heterotrófico</b> come outros seres (animais, fungos). A dica: "auto" = si mesmo.</div>
+    <div class="trap"><b>Pegadinha 5:</b> Célula <b>procariótica</b> NÃO tem núcleo com envoltório (bactérias). Célula <b>eucariótica</b> TEM núcleo e organelas (animais e plantas). Vírus não têm célula = são <b>acelulares</b>.</div>
+    <div class="trap"><b>Pegadinha 6:</b> Reprodução <b>assexuada</b> = 1 indivíduo, filhotes idênticos. <b>Sexuada</b> = 2 indivíduos, gametas, fecundação, zigoto. Não confunda com monoico/dioico (isso é sobre ter um ou dois sexos no mesmo corpo).</div>
+    <div class="trap"><b>Pegadinha 7:</b> Ordem dos níveis de organização: <b>célula → tecido → órgão → sistema → organismo</b>. Sempre do menor para o maior.</div>
+    <a class="nextlink" href="quiz.html">Agora teste você: ir para o Quiz 🎯</a>
+  </div>
+</div>
+
+<div class="save-panel">
+  <span id="saveInfo">💾 Progresso salvo automaticamente</span>
+  <button onclick="exportData()">📥 Exportar</button>
+  <button onclick="document.getElementById('importFile').click()">📤 Importar</button>
+  <button onclick="askReset()">🗑️ Zerar tudo</button>
+  <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <p id="modalMsg"></p>
+    <div>
+      <button class="btn btn-check" id="modalOk">OK</button>
+      <button class="btn" id="modalCancel" style="background:#16202c;border:1px solid var(--line);color:var(--txt);display:none">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const BLOCKS=[
+ {stage:'lava',tag:'🌋 Terra em fogo',title:'1. De onde veio a vida?',
+  html:`<p>Há bilhões de anos, a Terra não tinha nenhum ser vivo. Então uma pergunta gigante surgiu: <span class="key">como a vida começou?</span> Os cientistas descobriram que todos os seres vivos de hoje — bactérias e todos os outros — provavelmente vieram de <span class="key">uma única célula ancestral</span>, apelidada de <span class="key">LUCA</span> (o "último ancestral comum universal"). Estima-se que LUCA surgiu há cerca de <span class="key">4,2 bilhões de anos</span>.</p>
+  <p>Mas ninguém achou um fóssil de LUCA. Os fósseis de seres vivos mais antigos que conhecemos são os <span class="key">estromatólitos</span> — estruturas duras (calcárias) formadas por <span class="key">cianobactérias</span> (microrganismos que fazem fotossíntese). Foram encontrados na região de Pilbara, na Austrália, e têm cerca de <span class="key">3,4 bilhões de anos</span>.</p>
+  <p>Ou seja: LUCA é ainda mais antigo do que os fósseis que a gente encontrou. Estudar os estromatólitos ajuda a entender como eram as primeiras formas de vida do planeta.</p>`,
+  q:[{q:'O que é LUCA e qual é a idade estimada dele?',a:'LUCA é o último ancestral comum universal — a primeira célula da qual todos os seres vivos atuais teriam se originado. Estima-se que surgiu há cerca de 4,2 bilhões de anos.'},
+     {q:'O que são estromatólitos e por que são importantes?',a:'São os fósseis mais antigos que conhecemos: estruturas calcárias formadas por cianobactérias. São importantes porque ajudam a entender como eram os primeiros seres vivos da Terra.'}]},
+
+ {stage:'lava',tag:'🌋 Terra em fogo',title:'2. A ideia da geração espontânea (Abiogênese)',
+  html:`<p>Antigamente, muita gente acreditava que os seres vivos podiam surgir <span class="key">sozinhos, a partir de matéria sem vida</span>. Achavam, por exemplo, que ratos nasciam de pilhas de lixo, que vermes apareciam na carne e que sapos surgiam da lama. Essa ideia se chama <span class="key">abiogênese</span> ou <span class="key">geração espontânea</span>.</p>
+  <p>A palavra vem do grego: <b>a</b> = ausência, <b>bio</b> = vida, <b>genesis</b> = origem. Então "abiogênese" quer dizer "geração sem vida" — uma vida que surgiria sem precisar de outro ser vivo.</p>
+  <p>Naquela época, os cientistas achavam que existia uma "força vital" no ar capaz de criar seres vivos. Hoje sabemos que isso está errado, mas eles não tinham experimentos para provar o contrário. Foi aí que outros cientistas resolveram testar essa ideia.</p>`,
+  q:[{q:'O que a teoria da abiogênese defendia?',a:'Que os seres vivos podiam surgir sozinhos, de forma espontânea, a partir de matéria sem vida (como vermes na carne ou ratos no lixo).'},
+     {q:'Explique o significado da palavra "abiogênese".',a:'Vem do grego: a = ausência, bio = vida, genesis = origem. Significa "geração sem vida", ou seja, uma vida que não depende de outro ser vivo.'}]},
+
+ {stage:'lava',tag:'🌋 Terra em fogo',title:'3. Redi testa a geração espontânea',
+  html:`<p>O médico italiano <span class="key">Francesco Redi</span> desconfiou da geração espontânea e criou um experimento simples. Ele colocou pedaços de carne em frascos: <span class="key">alguns ficaram abertos e outros foram tampados com gaze</span> (um tecido fininho).</p>
+  <p>Resultado: nos frascos <b>abertos</b>, surgiram larvas. Nos frascos <b>tampados com gaze</b>, <span class="key">não</span> apareceram larvas. A conclusão de Redi foi que as larvas não nasciam da carne sozinhas — na verdade, as <span class="key">moscas pousavam na carne dos frascos abertos e botavam ovos</span>, e desses ovos nasciam as larvas.</p>
+  <p>Assim, Redi mostrou que a geração espontânea estava errada, pelo menos para os animais que a gente enxerga. Mesmo assim, muitos cientistas ainda achavam que os <b>microrganismos</b> (seres bem pequenininhos) podiam surgir espontaneamente.</p>`,
+  q:[{q:'Como foi o experimento de Redi?',a:'Ele colocou carne em frascos: uns abertos e outros tampados com gaze. Nos abertos surgiram larvas; nos tampados, não. Isso mostrou que as larvas vinham dos ovos das moscas, e não da carne.'},
+     {q:'O experimento de Redi convenceu todos os cientistas? Por quê?',a:'Não. Muitos continuaram acreditando na geração espontânea para os microrganismos, que são seres muito pequenos e mais difíceis de observar.'}]},
+
+ {stage:'ocean',tag:'🌊 Oceanos primitivos',title:'4. Pasteur e o balão "pescoço de cisne"',
+  html:`<p>Quem derrubou de vez a geração espontânea foi o cientista francês <span class="key">Louis Pasteur</span>. Ele fez um experimento genial usando um balão de vidro com o gargalo <span class="key">curvado em forma de "pescoço de cisne"</span>.</p>
+  <p>Pasteur colocou um caldo cheio de nutrientes no balão e ferveu tudo, deixando o caldo <span class="key">esterilizado</span> (sem nenhum ser vivo). O formato curvado do gargalo deixava o ar entrar, mas <span class="key">segurava os microrganismos</span> na curva, impedindo que chegassem ao caldo. Resultado: o caldo ficou <b>dias sem estragar</b>.</p>
+  <p>Depois, Pasteur <span class="key">quebrou o gargalo</span>. Só então os microrganismos chegaram ao caldo e ele estragou. Isso provou que os seres vivos vêm de <span class="key">outros seres vivos preexistentes</span> — essa é a teoria da <span class="key">biogênese</span>. Pasteur também criou a <b>pasteurização</b> (para conservar alimentos) e a vacina antirrábica.</p>`,
+  q:[{q:'Por que o formato de "pescoço de cisne" foi importante no experimento?',a:'Porque deixava o ar entrar, mas prendia os microrganismos na curva do gargalo, impedindo que chegassem ao caldo. Por isso o caldo não estragava.'},
+     {q:'O que a teoria da biogênese afirma?',a:'Que todo ser vivo surge a partir de outro ser vivo que já existia antes (a vida vem da vida).'}]},
+
+ {stage:'ocean',tag:'🌊 Oceanos primitivos',title:'5. De onde veio o primeiro ser vivo? (Panspermia)',
+  html:`<p>Certo, a vida vem de outra vida. Mas e o <span class="key">primeiro</span> ser vivo de todos, como surgiu? Existem duas hipóteses principais. A primeira é a <span class="key">panspermia</span> (ou cosmogênese).</p>
+  <p>Segundo a panspermia, a matéria-prima da vida <span class="key">veio do espaço</span>, grudada em meteoritos que caíram na Terra. Atenção nos nomes: <span class="key">meteoro</span> é o rastro luminoso no céu; <span class="key">meteoroide</span> é a rocha viajando no espaço; e <span class="key">meteorito</span> é o pedaço que atravessa a atmosfera e chega ao chão.</p>
+  <p>Há pistas a favor: em meteoritos como o <b>ALH84001</b> (que veio de Marte) e o <b>Murchison</b> (que caiu na Austrália), foram achadas moléculas orgânicas — as mesmas dos seres vivos. Mas essa hipótese tem problemas: ela só empurra a pergunta para longe (a vida ainda teria que ter surgido em <i>algum</i> lugar), e a viagem pelo espaço é muito agressiva (frio, radiação, calor).</p>`,
+  q:[{q:'O que a hipótese da panspermia propõe?',a:'Que a matéria-prima da vida veio do espaço, trazida por meteoritos que se chocaram com a Terra.'},
+     {q:'Qual a diferença entre meteoro, meteoroide e meteorito?',a:'Meteoroide é a rocha no espaço; meteoro é o rastro de luz quando ela entra na atmosfera; meteorito é o pedaço que chega ao chão.'}]},
+
+ {stage:'ocean',tag:'🌊 Oceanos primitivos',title:'6. A hipótese mais aceita: Evolução Química (Oparin)',
+  html:`<p>A segunda hipótese, e a <span class="key">mais aceita hoje</span>, é a da <span class="key">evolução química</span>, defendida pelo cientista russo <span class="key">Alexander Oparin</span>. Por essa ideia, a vida se formou <b>na própria Terra</b>, a partir de matéria sem vida.</p>
+  <p>A Terra primitiva (há cerca de 4,6 bilhões de anos) era um lugar terrível: muitos <b>vulcões</b>, atmosfera tóxica, calor extremo e <b>sem água líquida</b>. Com o tempo, o planeta foi <span class="key">esfriando</span> e a água se acumulou, formando os <span class="key">mares primitivos</span>. Ali, com a energia de <b>raios</b> e da <b>radiação ultravioleta</b>, moléculas simples reagiram e formaram <span class="key">moléculas orgânicas</span>, como as proteínas.</p>
+  <p>Essas proteínas se juntaram formando aglomerados chamados <span class="key">coacervados</span> (que ainda <b>não</b> eram seres vivos). Deles pode ter surgido a primeira célula com membrana. O <span class="key">experimento de Miller e Urey</span> imitou a atmosfera primitiva em laboratório e conseguiu produzir <b>aminoácidos</b>, reforçando a ideia de Oparin.</p>`,
+  q:[{q:'Segundo a evolução química, como era a Terra primitiva?',a:'Tinha muitos vulcões, atmosfera tóxica, temperaturas muito altas e não havia água líquida. Depois ela foi esfriando e se formaram os mares primitivos.'},
+     {q:'O que são coacervados e qual a importância do experimento de Miller e Urey?',a:'Coacervados são aglomerados de proteínas envolvidas por água (ainda não eram vivos), dos quais teria surgido a primeira célula. O experimento de Miller e Urey imitou a Terra primitiva e produziu aminoácidos, apoiando a hipótese de Oparin.'}]},
+
+ {stage:'life',tag:'🦠 A vida celular',title:'7. O que os seres vivos têm em comum? (Composição química e Metabolismo)',
+  html:`<p>Agora entramos no Capítulo 14. Como saber se algo é um <span class="key">ser vivo</span> ou não? Os seres vivos têm <span class="key">características em comum</span> que uma pedra, por exemplo, não tem. Vamos ver as primeiras.</p>
+  <p><span class="key">Composição química:</span> tudo é feito de átomos, que se juntam em moléculas. Os seres vivos têm <span class="key">compostos orgânicos</span> formados principalmente por <span class="key">carbono, hidrogênio, oxigênio e nitrogênio</span>. Exemplos: <b>carboidratos, proteínas, lipídeos e ácidos nucleicos</b>. Os ácidos nucleicos formam o <b>DNA</b>, que guarda as informações genéticas.</p>
+  <p><span class="key">Metabolismo:</span> é o conjunto de reações de <b>construir e degradar substâncias</b> para obter energia. Exemplos: respiração, digestão e fotossíntese. Pela forma de se alimentar, os seres se dividem em: <span class="key">autotróficos</span> (produzem o próprio alimento — como as plantas e algas, pela fotossíntese) e <span class="key">heterotróficos</span> (comem outros seres — como os animais e fungos).</p>`,
+  q:[{q:'Quais são os principais elementos dos compostos orgânicos? Dê exemplos de compostos.',a:'Principalmente carbono, hidrogênio, oxigênio e nitrogênio. Exemplos de compostos orgânicos: carboidratos, proteínas, lipídeos e ácidos nucleicos.'},
+     {q:'Qual a diferença entre seres autotróficos e heterotróficos?',a:'Autotróficos produzem o próprio alimento (plantas e algas, por fotossíntese). Heterotróficos obtêm energia se alimentando de outros seres (animais e fungos).'}]},
+
+ {stage:'life',tag:'🦠 A vida celular',title:'8. Reagir ao ambiente, evoluir e se adaptar',
+  html:`<p><span class="key">Reação a estímulos e movimento:</span> os seres vivos <b>respondem</b> ao ambiente — a mudanças de temperatura, luz, sons e ao toque. É por isso que a gente tira a mão de uma panela quente ou para ao ouvir uma buzina. Nós usamos os <span class="key">órgãos dos sentidos</span>: olfato, gustação (paladar), visão, audição e tato. Até algumas plantas fecham as folhas quando são tocadas.</p>
+  <p><span class="key">Evolução:</span> é a <b>transformação dos seres vivos ao longo do tempo</b>. Vencem os que têm características mais adequadas ao ambiente — isso é a <b>seleção</b>. Foi a evolução que criou toda a diversidade de vida que existe.</p>
+  <p><span class="key">Adaptação:</span> são características que ajudam a sobreviver. Exemplo: os <b>cactos</b> têm folhas em forma de espinho para perder menos água no calor. Há seres que vivem em lugares extremos: no deserto (ficam no subsolo, raízes profundas), nas geleiras (o pinguim-imperador aguenta o frio) e no fundo do mar (os peixes abissais suportam a alta pressão e o escuro).</p>`,
+  q:[{q:'Por que reagir a estímulos é importante para os seres vivos?',a:'Porque ajuda na sobrevivência: perceber o perigo e reagir a ele (como fugir do calor, evitar comida estragada ou parar ao ouvir um som de alerta).'},
+     {q:'O que é adaptação? Dê um exemplo.',a:'São características que ajudam o ser vivo a sobreviver no ambiente. Exemplo: os cactos têm folhas em forma de espinhos, o que reduz a perda de água em locais secos.'}]},
+
+ {stage:'life',tag:'🦠 A vida celular',title:'9. A célula: descoberta e suas partes',
+  html:`<p>Todos os seres vivos são feitos de <span class="key">células</span>. Mas a gente só descobriu isso quando os <b>microscópios</b> foram inventados, no século XVII.</p>
+  <p>Em <span class="key">1665</span>, <span class="key">Robert Hooke</span> olhou um pedaço de <b>cortiça</b> (rolha) no microscópio e viu vários "compartimentos". Ele os chamou de células. Depois, <span class="key">Antony van Leeuwenhoek</span> conseguiu ver <b>células vivas</b> e o núcleo. Mais tarde, os cientistas alemães <span class="key">Schleiden e Schwann</span> criaram a <span class="key">teoria celular</span>: todos os seres vivos são formados por células.</p>
+  <p>A maioria das células tem três partes principais: a <span class="key">membrana celular</span> (ou plasmática), que delimita a célula e controla o que entra e sai; o <span class="key">citoplasma</span>, onde ficam as <b>organelas</b> (estruturas que fazem funções vitais); e o <span class="key">núcleo</span>, que é o "centro de controle" e guarda o material genético.</p>`,
+  q:[{q:'Quem foi Robert Hooke e o que ele observou em 1665?',a:'Foi um cientista que, em 1665, observou um pedaço de cortiça no microscópio e viu "compartimentos", que ele chamou de células (na verdade eram as paredes celulares).'},
+     {q:'Quais são as três partes principais da célula e o que cada uma faz?',a:'Membrana celular (delimita a célula e controla o que entra e sai), citoplasma (onde ficam as organelas) e núcleo (centro de controle, guarda o material genético).'}]},
+
+ {stage:'life',tag:'🦠 A vida celular',title:'10. Tipos de célula e níveis de organização',
+  html:`<p>As células se dividem em <b>dois grandes grupos</b>, dependendo de o núcleo ter ou não um envoltório (uma "capinha" chamada carioteca):</p>
+  <p><span class="key">Procarióticas:</span> <b>não</b> têm envoltório no núcleo — o material genético fica solto no citoplasma, numa região chamada <b>nucleoide</b>. Não têm organelas membranosas; a única organela são os <b>ribossomos</b>. Podem ter parede celular. Exemplos: <span class="key">bactérias e cianobactérias</span> (parecidas com os primeiros seres vivos).</p>
+  <p><span class="key">Eucarióticas:</span> <b>têm</b> núcleo com envoltório e <b>várias organelas</b>. Existem as animais (dos heterotróficos) e as vegetais (dos autotróficos). A maioria das espécies é feita de células eucarióticas. Já os <span class="key">vírus</span> são <b>acelulares</b> (não têm célula).</p>
+  <p>Quanto ao número de células: <span class="key">unicelulares</span> (uma só célula — bactérias, protozoários) e <span class="key">pluricelulares</span> (várias células — animais e plantas). Nos pluricelulares existe uma organização: <span class="key">célula → tecido → órgão → sistema → organismo</span> (do menor para o maior).</p>`,
+  q:[{q:'Qual a diferença entre célula procariótica e eucariótica?',a:'A procariótica não tem núcleo com envoltório (o material genético fica no nucleoide) e só tem ribossomos como organela (ex.: bactérias). A eucariótica tem núcleo com envoltório e várias organelas (ex.: células animais e vegetais).'},
+     {q:'Coloque em ordem os níveis de organização dos seres pluricelulares.',a:'Célula → tecido → órgão → sistema → organismo (do menor para o maior).'}]},
+
+ {stage:'life',tag:'🦠 A vida celular',title:'11. Reprodução: continuar a espécie',
+  html:`<p>A última característica é a <span class="key">reprodução</span>: a capacidade de deixar <b>descendentes</b> e continuar a espécie. Ela faz parte do <b>ciclo vital</b> (nascer, crescer, reproduzir e morrer). Existem dois tipos:</p>
+  <p><span class="key">Assexuada:</span> envolve <b>um só indivíduo</b> e gera descendentes <b>idênticos</b> a ele. É comum em seres unicelulares (bactérias e protozoários se dividem em dois) e em alguns pluricelulares (esponjas, algas, e as violetas, que brotam de uma folha).</p>
+  <p><span class="key">Sexuada:</span> geralmente envolve <b>dois indivíduos</b>, que produzem células especiais chamadas <span class="key">gametas</span>. A união dos gametas é a <span class="key">fecundação</span>, que forma a <span class="key">célula-ovo (zigoto)</span>, que vira um embrião e depois um novo ser. Os seres podem ser <span class="key">monoicos</span> (hermafroditas — têm os dois sexos no mesmo corpo, como a minhoca) ou <span class="key">dioicos</span> (sexos separados, como os leões — a maioria dos animais).</p>`,
+  q:[{q:'Qual a diferença entre reprodução assexuada e sexuada?',a:'Assexuada: um só indivíduo gera descendentes idênticos a ele. Sexuada: geralmente dois indivíduos produzem gametas, que se unem na fecundação, formando a célula-ovo (zigoto).'},
+     {q:'O que são seres monoicos e dioicos? Dê um exemplo de cada.',a:'Monoicos (hermafroditas) têm os dois sistemas reprodutores no mesmo corpo (ex.: minhoca). Dioicos têm sexos separados, macho e fêmea (ex.: leões).'}]}
+];
+
+/* ---------- estado / storage ---------- */
+const KEY='lg_ciencias6_cap1314_v1';
+let mem={}; let useMem=false;
+function load(){try{const r=localStorage.getItem(KEY);mem=r?JSON.parse(r):{};}catch(e){useMem=true;mem={}}return mem;}
+function save(){try{if(!useMem)localStorage.setItem(KEY,JSON.stringify(mem));}catch(e){useMem=true;}stamp();}
+function stamp(){const d=new Date();document.getElementById('saveInfo').textContent='💾 Salvo '+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR').slice(0,5);}
+load();
+if(!mem.answers)mem.answers={};
+if(!mem.done)mem.done={};
+if(!mem.eval)mem.eval={};
+
+/* ---------- render ---------- */
+const container=document.getElementById('blocks');
+BLOCKS.forEach((b,i)=>{
+  const div=document.createElement('div');
+  div.className='block'+(i>0 && !mem.done[i-1]?' locked':'');
+  div.id='block'+i;
+  const stClass=b.stage==='lava'?'st-lava':b.stage==='ocean'?'st-ocean':'st-life';
+  let qhtml='';
+  b.q.forEach((qq,qi)=>{
+    const saved=(mem.answers[i]&&mem.answers[i][qi])||'';
+    qhtml+=`<label>❓ ${qq.q}</label><textarea data-b="${i}" data-q="${qi}" oninput="onType(${i})">${saved}</textarea>`;
+  });
+  let modelhtml='';
+  b.q.forEach((qq)=>{modelhtml+=`<div class="ans"><b>Resposta-modelo:</b> ${qq.a}</div>`;});
+  div.innerHTML=`<h2><span class="stage ${stClass}">${b.tag}</span></h2>
+    <h2 style="font-size:1.15rem">${b.title}</h2>
+    ${b.html}
+    <div class="qbox">
+      ${qhtml}
+      <button class="btn btn-check" id="btn${i}" onclick="checkBlock(${i})" disabled>✅ Conferir minhas respostas</button>
+      <div class="hint" id="hint${i}">Responda todas as perguntas (mín. 3 letras cada) para liberar o botão.</div>
+      <div class="model" id="model${i}">
+        <h4>📗 Compare com as respostas-modelo</h4>
+        ${modelhtml}
+        <div class="selfeval" id="se${i}">
+          <span>Como você foi? (só para você se avaliar)</span>
+          <button onclick="setEval(${i},'ok',this)">😃 Acertei</button>
+          <button onclick="setEval(${i},'quase',this)">🙂 Quase lá</button>
+          <button onclick="setEval(${i},'rev',this)">🤔 Preciso revisar</button>
+        </div>
+      </div>
+    </div>`;
+  container.appendChild(div);
+});
+
+function onType(i){
+  const tas=document.querySelectorAll('textarea[data-b="'+i+'"]');
+  let allok=true;
+  if(!mem.answers[i])mem.answers[i]={};
+  tas.forEach(t=>{mem.answers[i][t.dataset.q]=t.value;if(t.value.trim().length<3)allok=false;});
+  document.getElementById('btn'+i).disabled=!allok;
+  document.getElementById('hint'+i).style.display=allok?'none':'block';
+  save();
+}
+function checkBlock(i){
+  document.getElementById('model'+i).classList.add('show');
+  mem.done[i]=true;save();
+  // unlock next
+  if(i+1<BLOCKS.length){const nx=document.getElementById('block'+(i+1));if(nx)nx.classList.remove('locked');}
+  updateProgress();
+  if(i+1<BLOCKS.length){document.getElementById('block'+(i+1)).scrollIntoView({behavior:'smooth',block:'start'});}
+  else{document.getElementById('finalCard').style.display='block';document.getElementById('finalCard').scrollIntoView({behavior:'smooth'});}
+}
+function setEval(i,v,btn){
+  mem.eval[i]=v;save();
+  btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function updateProgress(){
+  const n=Object.values(mem.done).filter(Boolean).length;
+  document.getElementById('pbar').style.width=(n/BLOCKS.length*100)+'%';
+  document.getElementById('plabel').textContent='Bloco '+n+' de '+BLOCKS.length+' concluídos';
+  if(n===BLOCKS.length)document.getElementById('finalCard').style.display='block';
+}
+/* restore visual state */
+BLOCKS.forEach((b,i)=>{
+  if(mem.done[i]){document.getElementById('model'+i).classList.add('show');
+    const nx=document.getElementById('block'+(i+1));if(nx)nx.classList.remove('locked');}
+  if(mem.eval[i]){const map={ok:0,quase:1,rev:2};const btns=document.querySelectorAll('#se'+i+' button');if(btns[map[mem.eval[i]]])btns[map[mem.eval[i]]].classList.add('sel');}
+  onType(i);
+});
+updateProgress();
+stamp();
+
+/* ---------- export / import / reset ---------- */
+function exportData(){
+  const blob=new Blob([JSON.stringify(mem,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='leitura-guiada-ciencias6.json';a.click();
+}
+function importData(ev){
+  const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=e=>{try{mem=JSON.parse(e.target.result);save();location.reload();}catch(err){showModal('Arquivo inválido.');}};
+  r.readAsText(f);
+}
+function askReset(){showModal('Tem certeza que quer apagar todo o progresso desta Leitura Guiada?',true,()=>{mem={answers:{},done:{},eval:{}};save();location.reload();});}
+/* ---------- modal ---------- */
+let modalCb=null;
+function showModal(msg,cancel,cb){
+  document.getElementById('modalMsg').textContent=msg;
+  document.getElementById('modalCancel').style.display=cancel?'inline-block':'none';
+  document.getElementById('modalBg').classList.add('show');modalCb=cb||null;
+}
+document.getElementById('modalOk').onclick=()=>{document.getElementById('modalBg').classList.remove('show');if(modalCb)modalCb();};
+document.getElementById('modalCancel').onclick=()=>{document.getElementById('modalBg').classList.remove('show');modalCb=null;};
+</script>
+</body>
+</html>
